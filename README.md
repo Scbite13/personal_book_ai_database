@@ -38,11 +38,49 @@ Tracks user reading activity:
 - rating  
 - notes  
 
-# Example Query
-## Get all books in a series
+## Example Queries
+
+```markdown
 ```sql
+-- Get all books in a series
 SELECT title
 FROM books
 WHERE series_id = 1
 ORDER BY series_order;
 
+-- Get all books with a specific tag
+SELECT b.title
+FROM books b
+JOIN book_tags bt ON b.id = bt.book_id
+JOIN tags t ON t.id = bt.tag_id
+WHERE t.name = 'trauma';
+
+-- Get user reading history
+SELECT b.title, ub.status, ub.rating
+FROM user_books ub
+JOIN books b ON ub.book_id = b.id
+WHERE ub.user_id = 1
+ORDER BY b.id;
+```
+
+# How to Run
+- Install PostgreSQL
+- Run schema.sql to create all tables
+- Run seed.sql to insert initial data
+- Use the example queries or build your own
+
+# Roadmap
+- Planned future development includes:
+- API integration for automatic book metadata
+- Natural‑language command processing
+- Automated tagging using a custom taxonomy
+- Series detection and auto‑linking
+- Recommendation engine based on themes, tones, and reading history
+- Full Book AI assistant for managing and exploring the library
+
+# Skills Demonstrated
+- SQL (DDL, DML, joins, constraints)
+- Database normalization and relational modeling
+- Metadata design for AI systems
+- System architecture planning
+- Automation‑ready schema design
